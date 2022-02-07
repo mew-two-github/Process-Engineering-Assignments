@@ -1,0 +1,1 @@
+* stages in distillation column include reboiler and condenser. So feed stage = feed tray + 1. stages = tray + 2 (reboiler and condenser).

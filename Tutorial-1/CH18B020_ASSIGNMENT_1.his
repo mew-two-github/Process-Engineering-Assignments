@@ -1,0 +1,696 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       JANUARY 24, 2022    
+ VERSION: 38.0   Build 380                               MONDAY      
+ INSTALLATION:                                           3:45:52 P.M.        
+
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           JANUARY 24, 2022    
+   3:45:52 P.M.                           MONDAY      
+   INPUT FILE: _5113nel.inm
+   RUN ID : _5113nel
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 38.0 at 15:45:52 Mon Jan 24, 2022
+          3    ;Directory C:\Users\HP\Documents\AspenTech\Aspen Plus V12.0  Runid _UNNAMED
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV120 PURE38' / 'APV120 AQUEOUS' / 'APV120 SOLIDS' &
+         18             / 'APV120 INORGANIC' / 'APESV120 AP-EOS' /  &
+         19            'NISTV120 NIST-TRC' / NOASPENPCD
+         20
+         21    PROP-SOURCES 'APV120 PURE38' / 'APV120 AQUEOUS' /  &
+         22            'APV120 SOLIDS' / 'APV120 INORGANIC' / 'APESV120 AP-EOS' &
+         23             / 'NISTV120 NIST-TRC'
+         24
+         25    COMPONENTS
+         26        ACETO-01 C3H6O-1 /
+         27        ETHAN-01 C2H6O-2 /
+         28        N-BUT-01 C4H10O-1 /
+         29        PHENO-01 C6H6O
+         30
+         31    SOLVE
+         32        RUN-MODE MODE=SIM
+         33
+         34    FLOWSHEET
+         35        BLOCK B1 IN=1 OUT=2 3
+         36
+         37    PROPERTIES UNIQUAC
+         38
+         39    PROP-DATA UNIQ-1
+         40        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         41            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         42        PROP-LIST UNIQ
+         43        BPVAL ACETO-01 ETHAN-01 -.1179000000 -61.88070000 0.0 0.0  &
+         44            25.00000000 78.30000000 0.0
+         45        BPVAL ETHAN-01 ACETO-01 .6983000000 -234.6708000 0.0 0.0  &
+         46            25.00000000 78.30000000 0.0
+         47        BPVAL ACETO-01 N-BUT-01 5.195200000 -1665.569200 0.0 0.0  &
+         48            58.10000000 115.0000000 0.0
+         49        BPVAL N-BUT-01 ACETO-01 -8.757900000 2734.848100 0.0 0.0  &
+         50            58.10000000 115.0000000 0.0
+         51        BPVAL ACETO-01 PHENO-01 -.3770000000 431.6133000 0.0 0.0  &
+         52            56.10000000 180.5000000 0.0
+         53        BPVAL PHENO-01 ACETO-01 -1.039900000 352.8884000 0.0 0.0  &
+         54            56.10000000 180.5000000 0.0
+         55        BPVAL ETHAN-01 N-BUT-01 0.0 87.26290000 0.0 0.0  &
+         56            70.00000000 110.9500000 0.0
+         57        BPVAL N-BUT-01 ETHAN-01 0.0 -132.5787000 0.0 0.0  &
+         58            70.00000000 110.9500000 0.0
+         59        BPVAL ETHAN-01 PHENO-01 .3173000000 209.7067000 0.0 0.0  &
+         60            78.82000000 177.8000000 0.0
+         61        BPVAL PHENO-01 ETHAN-01 -.3702000000 -191.2088000 0.0 0.0  &
+         62            78.82000000 177.8000000 0.0
+         63
+         64    STREAM 1
+         65        SUBSTREAM MIXED PRES=1.28 <atm> VFRAC=0. MOLE-FLOW=1.
+         66        MOLE-FLOW ACETO-01 0.25 / ETHAN-01 0.25 / N-BUT-01 0.25 /  &
+         67            PHENO-01 0.25
+         68
+         69    BLOCK B1 RADFRAC
+         70        PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+         71        COL-CONFIG CONDENSER=TOTAL
+         72        FEEDS 1 5
+         73        PRODUCTS 2 1 L / 3 9 L
+         74        P-SPEC 1 1.28
+         75        COL-SPECS MOLE-D=0.5 MOLE-RR=5.
+         76
+         77    EO-CONV-OPTI
+         78
+         79    STREAM-REPOR MOLEFLOW
+         80
+         81    PROPERTY-REP PCES
+         82    ;
+         83    ;
+         84    ;
+         85    ;
+         86    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV120 : (DATAVERSION - 38.0.0.14)                         
+      SQLLOCALDB.APV120 : (DATAVERSION - 38.0.0.20)                           
+      SQLLOCALDB.FACTV120 : (DATAVERSION - 38.0.0.1)                          
+      SQLLOCALDB.NISTV120 : (DATAVERSION - 38.0.0.12)                         
+ 
+ 
+
+ PDF updated                                                                      TIME =      1.09
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   1          ----       B1             2          B1         ----    
+   3          B1         ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   B1           1                              2 3                         
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      B1 
+
+Calculations begin                                                              time      0.08
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.08
+
+      ENTHALPY CALCULATION FOR INLET STREAM 1 OF BLOCK B1                         TIME =      0.08
+      KODE = 3  NTRIAL =   5  T = 368.1423  P =  129696.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =      0.08
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      946.41    
+          2    1    3      196.74    
+          3    1    3      31.012    
+          4    1    3      8.7293    
+          5    1    2     0.97645    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      0.31
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      0.33
+
+ Report Writer entered                                                            Time =      0.34
+
+ Results generated                                                                Time =      0.48
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   16:05:32:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 9
+     PRODUCTS DISTILLA 1 L / 3 9 L
+     P-SPEC 1 1.28 / 2 1.28
+     COL-SPECS DP-STAGE=1.28 MOLE-D=0.5 MOLE-RR=5.
+
+ RENAME       IS  NEW 01/24/2022   16:05:32:99 
+ RENAME
+     STREAM "1" "FEED" / "2" "DISTILLA"
+
+ PDF updated                                                                      TIME =   1178.64
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+
+Calculations begin                                                              time   1178.82
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =   1178.82
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "B1" (MODEL: "RADFRAC")    
+                                                               (UDL03A.7260)    
+      FEED PRESSURE  0.12970E+06 (N/SQM) OF STREAM FEED                         
+      IS LOWER THAN STAGE   9 PRESSURE  0.10240E+07 (N/SQM).                    
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    7      15076.    
+          2    1    3      2778.0    
+          3    1    3      2791.3    
+          4    1    3      13373.    
+          5    1    3      72814.    
+          6    1    3      43585.    
+          7    1    3      6616.2    
+          8    1    3      3205.1    
+          9    1    3      63539.    
+         10    1    4      82878.    
+         11    1    3     0.13338E+06
+         12    1    4      3746.8    
+         13    1    4      15721.    
+         14    1    4     0.12990E+06
+         15    1    3      45578.    
+         16    1    3      4966.6    
+         17    1    3      3454.5    
+         18    1    3     0.18541E+06
+         19    1    3      33799.    
+         20    1    3      16561.    
+         21    1    3      2560.2    
+         22    1    3      12504.    
+         23    1    4     0.10311E+06
+         24    1    3      53035.    
+         25    1    3      5602.7    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "B1" (MODEL: "RADFRAC")      
+                                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+ Report Writer entered                                                            Time =   1178.90
+
+ Results generated                                                                Time =   1178.97
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   16:06:04:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 9
+     PRODUCTS DISTILLA 1 L / 3 9 L
+     P-SPEC 1 1.28
+     COL-SPECS MOLE-D=0.5 MOLE-RR=5.
+
+ PDF updated                                                                      TIME =   1211.12
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1211.14
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =   1211.14
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    7      42323.    
+          2    1    3      2013.3    
+          3    1    4      2262.0    
+          4    1    3      1200.9    
+          5    1    3      1272.5    
+          6    1    3      780.70    
+          7    1    3      85.799    
+          8    1    3      22.924    
+          9    1    3      5.5751    
+         10    1    3      1.5015    
+         11    1    3     0.21054    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1211.14
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1211.14
+
+ Report Writer entered                                                            Time =   1211.16
+
+ Results generated                                                                Time =   1211.18
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   16:21:08:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 5
+     PRODUCTS DISTILLA 1 L / 3 9 L
+     P-SPEC 1 1.28
+     COL-SPECS MOLE-D=0.5 MOLE-RR=5.
+
+ PDF updated                                                                      TIME =   2114.63
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   2114.66
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =   2114.66
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      443.33    
+          2    1    2      91.648    
+          3    1    2      32.128    
+          4    1    3      6.3679    
+          5    1    2      1.9507    
+          6    1    3     0.42492    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2114.67
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2114.67
+
+ Report Writer entered                                                            Time =   2114.68
+
+ Results generated                                                                Time =   2114.70
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   16:24:24:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 5
+     PRODUCTS DISTILLA 1 L / 3 9 L
+     P-SPEC 1 1.28 <atm>
+     COL-SPECS MOLE-D=0.5 MOLE-RR=5.
+
+ PDF updated                                                                      TIME =   2310.60
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   2310.61
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =   2310.61
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      10.575    
+          2    1    3      2.8470    
+          3    1    3     0.54390    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2310.62
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2310.62
+
+ Report Writer entered                                                            Time =   2310.64
+
+ Results generated                                                                Time =   2310.66
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   16:27:36:09 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=9 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 5
+     PRODUCTS DISTILLA 1 L / 3 9 L
+     P-SPEC 1 1.28 <atm>
+     COL-SPECS D:F=0.5 MOLE-RR=5.
+
+ PDF updated                                                                      TIME =   2502.29
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   2502.31
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =   2502.32
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.84298E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2502.32
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2502.32
+
+ Report Writer entered                                                            Time =   2502.40
+
+ Results generated                                                                Time =   2502.42
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         1
+        WARNINGS      0        0         1
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   19:30:19:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=11 ALGORITHM=STANDARD HYDRAULIC=YES MAXOL=25  &
+         DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS FEED 5
+     PRODUCTS DISTILLA 1 L / 3 11 L
+     P-SPEC 1 1.28 <atm>
+     COL-SPECS D:F=0.5 MOLE-RR=5.
+     REPORT HYDRAULIC
+
+ FLOWSHEET    IS  NEW 01/24/2022   19:30:19:99 
+ FLOWSHEET
+     BLOCK B1 IN=FEED OUT=DISTILLA 3
+
+ PDF updated                                                                      TIME =    236.40
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+Calculations begin                                                              time    237.46
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =    237.46
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =    237.46
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      144.22    
+          2    1    3      32.148    
+          3    1    3      18.364    
+          4    1    2      8.8024    
+          5    1    3     0.66097    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    237.88
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    237.88
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B1       01/24/2022   19:34:17:99 
+ BLOCK B1 RADFRAC
+     PARAM NSTAGE=11 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 6
+     PRODUCTS DISTILLA 1 L / 3 11 L
+     P-SPEC 1 1.28 <atm>
+     COL-SPECS D:F=0.5 MOLE-RR=5.
+     REPORT NOHYDRAULIC
+
+ PDF updated                                                                      TIME =    474.43
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+
+Calculations begin                                                              time    474.58
+
+
+      UOS BLOCK B1       MODEL: RADFRAC                                           TIME =    474.58
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      208.12    
+          2    1    3      42.735    
+          3    1    3      7.8512    
+          4    1    3      1.8567    
+          5    1    3     0.45618    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    474.59
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    474.59
+
+ Report Writer entered                                                            Time =   1837.47
+
+ Results generated                                                                Time =   1837.48
+
+ Report Writer entered                                                            Time =   1837.69
+
+ Results generated                                                                Time =   1837.71
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   1840.22
+
+ Results generated                                                                Time =   1840.22
+
+ Report Writer entered                                                            Time =   1840.41
+
+ Results generated                                                                Time =   1840.42
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       FEED     01/24/2022   20:34:56:99 
+ STREAM FEED
+     SUBSTREAM MIXED PRES=1.2 <atm> VFRAC=0. MOLE-FLOW=1.
+     MOLE-FLOW ACETO-01 0.25 / ETHAN-01 0.25 / N-BUT-01 0.25 /  &
+         PHENO-01 0.25
+
+ CHANGES WERE MADE TO RENAME       01/24/2022   20:34:56:99 
+ RENAME
+     BLOCK "B1" "COLUMN"
+     STREAM "3" "BOTTOMS" / "DISTILLA" "TOPS"
+
+ BLOCK        COLUMN   IS NEW 01/24/2022   20:34:56:99 
+ BLOCK COLUMN RADFRAC
+     PARAM NSTAGE=11 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 6
+     PRODUCTS TOPS 1 L / BOTTOMS 11 L
+     P-SPEC 1 1.2 <atm>
+     COL-SPECS D:F=0.5 MOLE-RR=5.
+     REPORT NOHYDRAULIC
+
+ PDF updated                                                                      TIME =    751.16
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+Calculations begin                                                              time    752.20
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =    752.20
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK COLUMN                  TIME =    752.20
+      KODE = 3  NTRIAL =   5  T = 365.9417  P =  121590.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK COLUMN   MODEL: RADFRAC                                           TIME =    752.25
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      46.921    
+          2    1    3      14.344    
+          3    1    2      2.2034    
+          4    1    3     0.40930    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    752.26
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    752.26
+
+ Report Writer entered                                                            Time =   5471.27
+
+ Results generated                                                                Time =   5471.30
+
+ Report Writer entered                                                            Time =   5471.67
+
+ Results generated                                                                Time =   5471.68
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =   3276.55
+
+ Results generated                                                                Time =   3276.60
+
+ Report Writer entered                                                            Time =   3277.95
+
+ Results generated                                                                Time =   3277.95
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
