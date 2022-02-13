@@ -1,0 +1,10 @@
+INPUT: CH18B020.inm
+MODNAME: apmain
+RUNID: CH18B020
+NEW_RUNID: CH18B020
+OLD_RUNID: CH18B020
+PDF: CH18B020.appdf
+USERNAME: HP
+XMOD: C:\Program Files\AspenTech\Aspen Plus V12.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _0953fjs.ads

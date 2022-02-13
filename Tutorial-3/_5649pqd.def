@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _5649pqd.inm
+MODNAME: apmain
+RUNID: _5649pqd
+NEW_RUNID: _5649pqd
+OLD_RUNID: _5649pqd
+PDF: _5649pqd.appdf
+USERNAME: HP
+XMOD: C:\Program Files\AspenTech\Aspen Plus V12.0\Engine\xeq\apmain
+DBCONN: _5649pqd.ads

@@ -1,0 +1,116 @@
+ >>ORIGINAL RUN                           FEBRUARY 13, 2022   
+   9:29:36 A.M.                           SUNDAY      
+   INPUT FILE: _5649pqd.inm
+   RUN ID : _5649pqd
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 38.0 at 09:29:36 Sun Feb 13, 2022
+          3    ;Directory C:\Users\HP\Documents\Acad stuff\SEM VIII\CH4250\Tutorials\Tutorial-3  Runid CH18B020
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV120 PURE38' / 'APV120 AQUEOUS' / 'APV120 SOLIDS' &
+         18             / 'APV120 INORGANIC' / 'APESV120 AP-EOS' /  &
+         19            'NISTV120 NIST-TRC' / NOASPENPCD
+         20
+         21    PROP-SOURCES 'APV120 PURE38' / 'APV120 AQUEOUS' /  &
+         22            'APV120 SOLIDS' / 'APV120 INORGANIC' / 'APESV120 AP-EOS' &
+         23             / 'NISTV120 NIST-TRC'
+         24
+         25    COMPONENTS
+         26        BENZE-01 C6H6 /
+         27        HYDRO-01 H2 /
+         28        CYCLO-01 C6H12-1 /
+         29        NITRO-01 N2 /
+         30        METHA-01 CH4
+         31
+         32    SOLVE
+         33        RUN-MODE MODE=SIM
+         34
+         35    FLOWSHEET
+         36        BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+         37        BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         38            PRODUCT
+         39        BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+         40        BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+         41        BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+         42        BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+         43        BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+         44
+         45    PROPERTIES UNIQUAC
+         46
+         47    PROP-DATA UNIQ-1
+         48        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         49            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         50        PROP-LIST UNIQ
+         51        BPVAL BENZE-01 CYCLO-01 0.0 14.95410000 0.0 0.0  &
+         52            77.40000000 80.75000000 0.0
+         53        BPVAL CYCLO-01 BENZE-01 0.0 -62.83480000 0.0 0.0  &
+         54            77.40000000 80.75000000 0.0
+         55
+         56    STREAM C6H6
+         57        SUBSTREAM MIXED TEMP=100. <F> PRES=15. <psia>  &
+         58            MOLE-FLOW=100. <lbmol/hr>
+         59        MOLE-FRAC BENZE-01 1.
+         60
+         61    STREAM H2
+         62        SUBSTREAM MIXED TEMP=120. <F> PRES=335. <psia>  &
+         63            MOLE-FLOW=310. <lbmol/hr>
+         64        MOLE-FRAC HYDRO-01 0.9 / NITRO-01 0.002 / METHA-01 0.098
+         65
+         66    BLOCK L-SPLIT FSPLIT
+         67        FRAC DIST-IN 0.7
+         68
+         69    BLOCK V-SPLIT FSPLIT
+         70        FRAC RECYCLE1 0.92
+         71
+         72    BLOCK HEATER-1 HEATER
+         73        PARAM TEMP=300. <F> PRES=330. <psia> DPPARMOPT=NO
+         74
+         75    BLOCK HEATER-2 HEATER
+         76        PARAM TEMP=300. <F> PRES=330. <psia> DPPARMOPT=NO
+         77
+         78    BLOCK FLASH FLASH2
+         79        PARAM TEMP=120. <F> PRES=310. <psi>
+         80
+         81    BLOCK DISTILLA RADFRAC
+         82        PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+         83        COL-CONFIG CONDENSER=TOTAL
+         84        FEEDS DIST-IN 8
+         85        PRODUCTS TOPS 1 L / BOTTOMS 16 L
+         86        P-SPEC 1 200. <psi>
+         87        COL-SPECS B:F=1. MOLE-RR=1.2
+         88        DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         89            NITRO-01 METHA-01
+         90        SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         91            NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         92            SPEC-DESCRIP="c6h12_recovery"
+         93        VARY 1 B:F 1. 100.
+         94
+         95    BLOCK REACTOR RSTOIC
+         96        PARAM TEMP=400. <F> PRES=315. <psi>
+         97        STOIC 1 MIXED BENZE-01 -1. / HYDRO-01 -3. / CYCLO-01 1.
+         98        CONV 1 MIXED BENZE-01 0.998
+         99
+        100    EO-CONV-OPTI
+        101
+        102    STREAM-REPOR MOLEFLOW
+        103
+        104    PROPERTY-REP PCES
+        105    ;
+        106    ;
+        107    ;
+        108    ;
+        109    ;
+
+   SIMULATION STARTED     MODULE USED: apmain  
+   LOCATED IN:C:\Program Files\AspenTech\Aspen Plus V12.0\Engine\\xeq
