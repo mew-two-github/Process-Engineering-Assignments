@@ -1,0 +1,3556 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       FEBRUARY 13, 2022   
+ VERSION: 38.0   Build 380                               SUNDAY      
+ INSTALLATION:                                           9:29:36 A.M.        
+
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           FEBRUARY 13, 2022   
+   9:29:36 A.M.                           SUNDAY      
+   INPUT FILE: _5649pqd.inm
+   RUN ID : _5649pqd
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 38.0 at 09:29:36 Sun Feb 13, 2022
+          3    ;Directory C:\Users\HP\Documents\Acad stuff\SEM VIII\CH4250\Tutorials\Tutorial-3  Runid CH18B020
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV120 PURE38' / 'APV120 AQUEOUS' / 'APV120 SOLIDS' &
+         18             / 'APV120 INORGANIC' / 'APESV120 AP-EOS' /  &
+         19            'NISTV120 NIST-TRC' / NOASPENPCD
+         20
+         21    PROP-SOURCES 'APV120 PURE38' / 'APV120 AQUEOUS' /  &
+         22            'APV120 SOLIDS' / 'APV120 INORGANIC' / 'APESV120 AP-EOS' &
+         23             / 'NISTV120 NIST-TRC'
+         24
+         25    COMPONENTS
+         26        BENZE-01 C6H6 /
+         27        HYDRO-01 H2 /
+         28        CYCLO-01 C6H12-1 /
+         29        NITRO-01 N2 /
+         30        METHA-01 CH4
+         31
+         32    SOLVE
+         33        RUN-MODE MODE=SIM
+         34
+         35    FLOWSHEET
+         36        BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+         37        BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         38            PRODUCT
+         39        BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+         40        BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+         41        BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+         42        BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+         43        BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+         44
+         45    PROPERTIES UNIQUAC
+         46
+         47    PROP-DATA UNIQ-1
+         48        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         49            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         50        PROP-LIST UNIQ
+         51        BPVAL BENZE-01 CYCLO-01 0.0 14.95410000 0.0 0.0  &
+         52            77.40000000 80.75000000 0.0
+         53        BPVAL CYCLO-01 BENZE-01 0.0 -62.83480000 0.0 0.0  &
+         54            77.40000000 80.75000000 0.0
+         55
+         56    STREAM C6H6
+         57        SUBSTREAM MIXED TEMP=100. <F> PRES=15. <psia>  &
+         58            MOLE-FLOW=100. <lbmol/hr>
+         59        MOLE-FRAC BENZE-01 1.
+         60
+         61    STREAM H2
+         62        SUBSTREAM MIXED TEMP=120. <F> PRES=335. <psia>  &
+         63            MOLE-FLOW=310. <lbmol/hr>
+         64        MOLE-FRAC HYDRO-01 0.9 / NITRO-01 0.002 / METHA-01 0.098
+         65
+         66    BLOCK L-SPLIT FSPLIT
+         67        FRAC DIST-IN 0.7
+         68
+         69    BLOCK V-SPLIT FSPLIT
+         70        FRAC RECYCLE1 0.92
+         71
+         72    BLOCK HEATER-1 HEATER
+         73        PARAM TEMP=300. <F> PRES=330. <psia> DPPARMOPT=NO
+         74
+         75    BLOCK HEATER-2 HEATER
+         76        PARAM TEMP=300. <F> PRES=330. <psia> DPPARMOPT=NO
+         77
+         78    BLOCK FLASH FLASH2
+         79        PARAM TEMP=120. <F> PRES=310. <psi>
+         80
+         81    BLOCK DISTILLA RADFRAC
+         82        PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+         83        COL-CONFIG CONDENSER=TOTAL
+         84        FEEDS DIST-IN 8
+         85        PRODUCTS TOPS 1 L / BOTTOMS 16 L
+         86        P-SPEC 1 200. <psi>
+         87        COL-SPECS B:F=1. MOLE-RR=1.2
+         88        DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         89            NITRO-01 METHA-01
+         90        SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         91            NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         92            SPEC-DESCRIP="c6h12_recovery"
+         93        VARY 1 B:F 1. 100.
+         94
+         95    BLOCK REACTOR RSTOIC
+         96        PARAM TEMP=400. <F> PRES=315. <psi>
+         97        STOIC 1 MIXED BENZE-01 -1. / HYDRO-01 -3. / CYCLO-01 1.
+         98        CONV 1 MIXED BENZE-01 0.998
+         99
+        100    EO-CONV-OPTI
+        101
+        102    STREAM-REPOR MOLEFLOW
+        103
+        104    PROPERTY-REP PCES
+        105    ;
+        106    ;
+        107    ;
+        108    ;
+        109    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV120 : (DATAVERSION - 38.0.0.14)                         
+      SQLLOCALDB.APV120 : (DATAVERSION - 38.0.0.20)                           
+      SQLLOCALDB.FACTV120 : (DATAVERSION - 38.0.0.1)                          
+      SQLLOCALDB.NISTV120 : (DATAVERSION - 38.0.0.12)                         
+ 
+ 
+
+ PDF updated                                                                      TIME =      0.82
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   H2         ----       HEATER-1       C6H6       ----       HEATER-2
+   H2-HOT     HEATER-1   REACTOR        PRODUCT    REACTOR    FLASH   
+   C6H6-HOT   HEATER-2   REACTOR        VAPOURF    FLASH      V-SPLIT 
+   LIQUIDF    FLASH      L-SPLIT        DIST-IN    L-SPLIT    DISTILLA
+   RECYCLE2   L-SPLIT    REACTOR        RECYCLE1   V-SPLIT    REACTOR 
+   PURGE      V-SPLIT    ----           TOPS       DISTILLA   ----    
+   BOTTOMS    DISTILLA   ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   HEATER-1     H2                             H2-HOT                      
+   REACTOR      H2-HOT C6H6-HOT RECYCLE1       PRODUCT                     
+                RECYCLE2                                                   
+   HEATER-2     C6H6                           C6H6-HOT                    
+   FLASH        PRODUCT                        VAPOURF LIQUIDF             
+   L-SPLIT      LIQUIDF                        DIST-IN RECYCLE2            
+   V-SPLIT      VAPOURF                        RECYCLE1 PURGE              
+   DISTILLA     DIST-IN                        TOPS BOTTOMS                
+
+      BLOCK $OLVER01 (METHOD: WEGSTEIN) HAS BEEN DEFINED TO CONVERGE
+               STREAMS: PRODUCT
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      HEATER-2 HEATER-1 
+      $OLVER01 FLASH V-SPLIT L-SPLIT REACTOR 
+      (RETURN $OLVER01) 
+      DISTILLA 
+
+Calculations begin                                                              time      0.06
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.06
+
+      ENTHALPY CALCULATION FOR INLET STREAM C6H6 OF BLOCK HEATER-2                TIME =      0.06
+      KODE = 2  NTRIAL =   1  T = 310.9278  P =  103421.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK HEATER-2 MODEL: HEATER                                            TIME =      0.06
+      KODE = 2  NTRIAL =   1  T = 422.0389  P = 2.275270E+06  V =  0.00000      Q =  231070.    
+
+      ENTHALPY CALCULATION FOR INLET STREAM H2 OF BLOCK HEATER-1                  TIME =      0.06
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.309744E+06  V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK HEATER-1 MODEL: HEATER                                            TIME =      0.06
+      KODE = 2  NTRIAL =   3  T = 422.0389  P = 2.275270E+06  V =  1.00000      Q =  117559.    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.06
+      ITER   0 For Tear Streams: PRODUCT
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.06
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "FLASH" (MODEL: "FLASH2")  
+                                                               (UFL01I.1)       
+      ZERO FEED TO THE BLOCK.  BLOCK BYPASSED                                   
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.06
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "V-SPLIT" (MODEL:          
+      "FSPLIT")                                                (USP01I.1)       
+      ZERO FEED TO THE BLOCK. BLOCK BYPASSED                                    
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.06
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "L-SPLIT" (MODEL:          
+      "FSPLIT")                                                (USP01I.1)       
+      ZERO FEED TO THE BLOCK. BLOCK BYPASSED                                    
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.06
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9318637"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V = 0.712675      Q =-2.137668E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.08
+      ITER   1 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      KODE = 1  NTRIAL =   7  T = 477.5944  P = 2.171849E+06  V = 0.712675      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    1:   5 VARS NOT CONVERGED, MAX ERR/TOL     0.10000E+07    TIME =      0.09
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.09
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.137375E+06  V = 0.189442      Q = -611202.    
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.09
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9124969"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V = 0.902999      Q =-1.862496E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.09
+      ITER   2 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  575.777    
+      KODE = 1  NTRIAL =   3  T = 575.7774  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    2:   6 VARS NOT CONVERGED, MAX ERR/TOL      8557.5        TIME =      0.09
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.09
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.481040      Q =-1.517192E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.09
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9034996"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.643529E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.09
+      ITER   3 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  549.986    
+      KODE = 1  NTRIAL =   3  T = 549.9862  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    3:   6 VARS NOT CONVERGED, MAX ERR/TOL     -2150.4        TIME =      0.09
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.09
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.595453      Q =-1.504528E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.09
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9024818"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.580530E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.09
+      ITER   4 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      KODE = 1  NTRIAL =   7  T = 393.2363  P = 2.171849E+06  V = 0.732045      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    4:   6 VARS NOT CONVERGED, MAX ERR/TOL     -1221.4        TIME =      0.09
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.09
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.630553      Q = -468188.    
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.09
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.09
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9010679"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.540265E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.09
+      ITER   5 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  517.566    
+      KODE = 1  NTRIAL =   3  T = 517.5662  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    5:   6 VARS NOT CONVERGED, MAX ERR/TOL      1576.3        TIME =      0.11
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.11
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.654311      Q =-1.414284E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.11
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9016754"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.531460E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.11
+      ITER   6 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  486.158    
+      KODE = 1  NTRIAL =   3  T = 486.1584  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    6:   6 VARS NOT CONVERGED, MAX ERR/TOL     -550.32        TIME =      0.11
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.11
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.662734      Q =-1.268374E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.11
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9014200"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.521429E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.11
+      ITER   7 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  479.204    
+      KODE = 1  NTRIAL =   3  T = 479.2036  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    7:   6 VARS NOT CONVERGED, MAX ERR/TOL     -114.08        TIME =      0.11
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.11
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.666916      Q =-1.240099E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.11
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012970"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.516395E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.11
+      ITER   8 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  478.518    
+      KODE = 1  NTRIAL =   3  T = 478.5176  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    8:   4 VARS NOT CONVERGED, MAX ERR/TOL     -25.051        TIME =      0.11
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.11
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.669234      Q =-1.239016E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.11
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.11
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012700"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.514101E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.16
+      ITER   9 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  475.928    
+      KODE = 1  NTRIAL =   3  T = 475.9276  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    9:   6 VARS NOT CONVERGED, MAX ERR/TOL     -13.444        TIME =      0.16
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.16
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.670401      Q =-1.227391E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.16
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012505"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.512861E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.16
+      ITER  10 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  478.705    
+      KODE = 1  NTRIAL =   3  T = 478.7047  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   10:   6 VARS NOT CONVERGED, MAX ERR/TOL      19.244        TIME =      0.16
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.16
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.670796      Q =-1.242923E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.16
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012079"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.511955E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.16
+      ITER  11 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  477.962    
+      KODE = 1  NTRIAL =   3  T = 477.9622  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   11:   5 VARS NOT CONVERGED, MAX ERR/TOL     -15.847        TIME =      0.16
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.16
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.671267      Q =-1.238749E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.16
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.16
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012313"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.511874E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.16
+      ITER  12 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  477.601    
+      KODE = 1  NTRIAL =   3  T = 477.6015  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   12:   4 VARS NOT CONVERGED, MAX ERR/TOL     -4.6394        TIME =      0.17
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =      0.17
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.671422      Q =-1.237200E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =      0.17
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =      0.26
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =      0.26
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9012261"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.511672E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =      0.26
+      ITER  13 For Tear Streams: PRODUCT
+
+  LOOP $OLVER01 ITER   13:     *** CONVERGED *** , MAX ERR/TOL     0.63834        TIME =      0.26
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =      0.26
+
+  *** SEVERE ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:    
+      "RADFRAC")                                               (UDL03A.7820)    
+      COLUMN SPECS RESULT IN NEG. OR ZERO                                       
+      INTERNAL FLOW TO TOP OR BOTTOM STAGE.                                     
+
+      FILLING OUTLET STREAMS BASED ON VAPOR/LIQUID SPLIT FROM
+      COMPOSITE FEED FLASH.
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:         
+      "RADFRAC")                                               (UDL3II.7200)    
+      REST OF BLOCK BYPASSED DUE TO SEVERE ERROR.                               
+
+      GENERATING RESULTS FOR UOS BLOCK HEATER-1 MODEL: HEATER                     TIME =      0.39
+
+      GENERATING RESULTS FOR UOS BLOCK HEATER-2 MODEL: HEATER                     TIME =      0.39
+      STREAM BOTTOMS WILL BE FLASHED FOR PROPERTY CALCULATIONS.
+      KODE = 2  NTRIAL =   2  T = 321.9222  P = 1.378951E+06  V = 2.478774E-07  Q = 2.618533E-03
+      STREAM TOPS WILL BE FLASHED FOR PROPERTY CALCULATIONS.
+      KODE = 2  NTRIAL =   2  T = 154.7826  P = 1.378951E+06  V =  0.00000      Q =-5.708036E-09
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       H2       02/13/2022   09:39:03:99 
+ STREAM H2
+     SUBSTREAM MIXED TEMP=120. <F> PRES=335. <psia>  &
+         MOLE-FLOW=335. <lbmol/hr>
+     MOLE-FRAC HYDRO-01 0.9 / NITRO-01 0.002 / METHA-01 0.098
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   09:39:03:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS B:F=1. MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 B:F 0.1 1.
+
+ TITLE        IS  NEW 02/13/2022   09:39:03:99 
+ TITLE
+
+ PDF updated                                                                      TIME =    565.88
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    565.96
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM H2 OF BLOCK HEATER-1                  TIME =    565.96
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.309744E+06  V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK HEATER-1 MODEL: HEATER                                            TIME =    565.96
+      KODE = 2  NTRIAL =   3  T = 422.0389  P = 2.275270E+06  V =  1.00000      Q =  127040.    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.96
+      ITER   0 For Tear Streams: PRODUCT
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.96
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.671422      Q =-1.237200E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.96
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "REACTOR" (MODEL:          
+      "RSTOIC")                                                (URE07.3)        
+      COMPONENT "HYDRO-01" HAS ZERO FLOWRATE IN THE OUTLET STREAM.              
+      FRACTIONAL CONVERSION HAS BEEN MODIFIED BY                                
+      A FACTOR OF "0.9739056"                                                   
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.710179E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.96
+      ITER   1 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  485.357    
+      KODE = 1  NTRIAL =   3  T = 485.3568  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    1:   6 VARS NOT CONVERGED, MAX ERR/TOL     -7211.8        TIME =    565.96
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.96
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.137375E+06  V = 0.682115      Q =-1.295554E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.96
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.679172E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.96
+      ITER   2 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  476.248    
+      KODE = 1  NTRIAL =   3  T = 476.2476  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    2:   7 VARS NOT CONVERGED, MAX ERR/TOL      10000.        TIME =    565.96
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.96
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.137375E+06  V = 0.688594      Q =-1.255973E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.96
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.672811E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.97
+      ITER   3 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  479.096    
+      KODE = 1  NTRIAL =   3  T = 479.0958  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    3:   7 VARS NOT CONVERGED, MAX ERR/TOL      8748.8        TIME =    565.97
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.698522      Q =-1.279958E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.663608E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.97
+      ITER   4 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  478.736    
+      KODE = 1  NTRIAL =   3  T = 478.7361  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    4:   6 VARS NOT CONVERGED, MAX ERR/TOL      736.85        TIME =    565.97
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.703971      Q =-1.284490E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.657824E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.97
+      ITER   5 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  474.044    
+      KODE = 1  NTRIAL =   3  T = 474.0442  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    5:   6 VARS NOT CONVERGED, MAX ERR/TOL      262.43        TIME =    565.97
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.706119      Q =-1.267189E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    565.97
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    565.97
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.653241E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    565.97
+      ITER   6 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  478.889    
+      KODE = 1  NTRIAL =   3  T = 478.8886  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    6:   6 VARS NOT CONVERGED, MAX ERR/TOL      116.49        TIME =    565.97
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.04
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.708495      Q =-1.291615E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.04
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.04
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.04
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.652457E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.04
+      ITER   7 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  478.012    
+      KODE = 1  NTRIAL =   3  T = 478.0118  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    7:   6 VARS NOT CONVERGED, MAX ERR/TOL      55.966        TIME =    566.04
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.04
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.709382      Q =-1.288493E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.05
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.651219E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.05
+      ITER   8 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  477.602    
+      KODE = 1  NTRIAL =   3  T = 477.6016  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    8:   6 VARS NOT CONVERGED, MAX ERR/TOL      27.833        TIME =    566.05
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.05
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.709867      Q =-1.287151E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.05
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.650538E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.05
+      ITER   9 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.725    
+      KODE = 1  NTRIAL =   3  T = 477.7247  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    9:   3 VARS NOT CONVERGED, MAX ERR/TOL      14.073        TIME =    566.05
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.05
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.710163      Q =-1.288135E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.05
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.650211E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.05
+      ITER  10 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.687    
+      KODE = 1  NTRIAL =   3  T = 477.6870  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   10:   2 VARS NOT CONVERGED, MAX ERR/TOL      7.1749        TIME =    566.05
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.05
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.710320      Q =-1.288142E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.05
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.05
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.650019E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.05
+      ITER  11 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  477.405    
+      KODE = 1  NTRIAL =   3  T = 477.4047  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   11:   2 VARS NOT CONVERGED, MAX ERR/TOL      3.6731        TIME =    566.05
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.08
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.710373      Q =-1.286887E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.08
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.08
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.08
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.649868E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.08
+      ITER  12 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.660    
+      KODE = 1  NTRIAL =   3  T = 477.6603  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   12:   2 VARS NOT CONVERGED, MAX ERR/TOL      1.8841        TIME =    566.08
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    566.08
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.710446      Q =-1.288189E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    566.08
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    566.08
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    566.08
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.649854E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    566.08
+      ITER  13 For Tear Streams: PRODUCT
+
+  LOOP $OLVER01 ITER   13:     *** CONVERGED *** , MAX ERR/TOL     0.96795        TIME =    566.08
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    566.08
+
+  *** SEVERE ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:    
+      "RADFRAC")                                               (UDL03A.7820)    
+      COLUMN SPECS RESULT IN NEG. OR ZERO                                       
+      INTERNAL FLOW TO TOP OR BOTTOM STAGE.                                     
+
+      FILLING OUTLET STREAMS BASED ON VAPOR/LIQUID SPLIT FROM
+      COMPOSITE FEED FLASH.
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:         
+      "RADFRAC")                                               (UDL3II.7200)    
+      REST OF BLOCK BYPASSED DUE TO SEVERE ERROR.                               
+
+      GENERATING RESULTS FOR UOS BLOCK HEATER-1 MODEL: HEATER                     TIME =    566.10
+      STREAM BOTTOMS WILL BE FLASHED FOR PROPERTY CALCULATIONS.
+      KODE = 2  NTRIAL =   2  T = 321.9455  P = 1.378951E+06  V = 1.315875E-08  Q = 1.311473E-04
+      STREAM TOPS WILL BE FLASHED FOR PROPERTY CALCULATIONS.
+      KODE = 2  NTRIAL =   3  T =  48.7586  P = 1.378951E+06  V =  0.00000      Q =-6.329047E-11
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   09:42:46:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS B:F=0.5 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 B:F 0.1 0.99
+
+ PDF updated                                                                      TIME =    788.86
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    788.88
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    788.88
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      1328.7    
+          2    1    2      482.46    
+          3    7   11      235.28    
+          4    5    7      180.94    
+          5    5    6      141.20    
+          6    5    6      111.62    
+          7    5    6      89.305    
+          8    5    6      72.320    
+          9    5    6      59.298    
+         10    5    6      49.264    
+         11    5    6      41.504    
+         12    5    6      35.488    
+         13    5    6      30.818    
+         14    5    6      27.192    
+         15    5    6      24.378    
+         16    5    6      22.198    
+         17    5    6      20.515    
+         18    5    6      19.221    
+         19    5    6      18.232    
+         20    5    6      17.485    
+         21    5    6      16.927    
+         22    5    6      16.519    
+         23    5    6      16.230    
+         24    5    6      16.035    
+         25    5    6      15.915    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.54813        0.10000        0.99000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   09:44:40:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS B:F=0.5 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 B:F 0.1 0.8
+
+ PDF updated                                                                      TIME =    902.63
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    902.65
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    902.65
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6    9      1.8512    
+          2    5    6      1.5782    
+          3    5    6      1.4977    
+          4    5    6      1.5063    
+          5    5    6      1.4994    
+          6    5    6      1.5042    
+          7    5    6      1.5157    
+          8    5    6      1.5313    
+          9    5    6      1.5496    
+         10    5    6      1.5697    
+         11    5    6      1.5911    
+         12    5    6      1.6135    
+         13    5    6      1.6368    
+         14    5    6      1.6608    
+         15    5    6      1.6856    
+         16    5    6      1.7110    
+         17    5    6      1.7371    
+         18    5    6      1.7638    
+         19    5    6      1.7912    
+         20    5    6      1.8194    
+         21    5    6      1.8482    
+         22    5    6      1.8778    
+         23    5    6      1.9082    
+         24    5    6      1.9393    
+         25    5    6      1.9713    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.60570        0.10000        0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   09:55:43:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01 STREAMS=BOTTOMS BASE-STREAMS=DIST-IN  &
+         SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 1E-06 0.8
+
+ PDF updated                                                                      TIME =   1565.80
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1565.82
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   1565.82
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    7   23      690.20    
+          2    5   14      234.64    
+          3    5   14      139.17    
+          4    5   13      117.24    
+          5    5   12      122.67    
+          6    5   16      135.18    
+          7    5   16      153.37    
+          8    5   16      179.25    
+          9    5   16      215.79    
+         10    5   17      271.13    
+         11    5   20      308.13    
+         12    5   18      301.43    
+         13    5   18      288.55    
+         14    5   17      282.90    
+         15    5   17      282.23    
+         16    5   17      282.63    
+         17    5   17      283.76    
+         18    5   16      286.50    
+         19    5   17      291.66    
+         20    5   16      300.55    
+         21    5   18      315.41    
+         22    5   18      340.19    
+         23    5   18      357.04    
+         24    5   20     0.10882E+09
+         25    1    7     0.10318E+09
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.58589E-01    0.10000E-05    0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   09:59:01:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 1E-06 0.8
+
+ PDF updated                                                                      TIME =   1763.89
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1763.90
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   1763.90
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      16150.    
+          2    1   10      4960.3    
+          3    1   10     0.27341E+06
+          4    1    8      768.44    
+          5   11   79      402.01    
+          6    5   27      238.02    
+          7    5   22      137.49    
+          8    5   20      180.90    
+          9    5   22      85.779    
+         10    5   20      91.943    
+         11    5   20      46.500    
+         12    5   19      77.035    
+         13    5   20      28.987    
+         14    5   19      60.683    
+         15    5   20      49.492    
+         16    4   15      15.502    
+         17    2    6      49.309    
+         18    2    7      24.592    
+         19    2    5      22.018    
+         20    2    4      4.6264    
+         21    2    3      4.2226    
+         22    2    4      1.8102    
+         23    2    4     0.92804    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.58685E-01    0.10000E-05    0.80000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1763.92
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1763.95
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   10:01:59:09 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=16 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 16 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.8
+
+ PDF updated                                                                      TIME =   1941.49
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1941.51
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   1941.51
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   13     0.28766    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.58685E-01    0.10000E-02    0.80000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1941.51
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1941.51
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/13/2022   10:31:14:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   10:31:14:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 L / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.001 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.8
+
+ PDF updated                                                                      TIME =   3696.73
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   3696.78
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   3696.78
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   13     0.69515E-01
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.58685E-01    0.10000E-02    0.80000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   3696.79
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   3696.79
+
+ Report Writer entered                                                            Time =   6617.44
+
+ Results generated                                                                Time =   6617.52
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:26:54:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 L / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.001 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.8
+
+ PDF updated                                                                      TIME =   7037.01
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   7037.04
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   7037.04
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      1349.6    
+          2    1    4      67.943    
+          3    7   29      137.68    
+          4    5   25      154.72    
+          5    5   26      133.63    
+          6    5   23      108.57    
+          7    5   25      88.181    
+          8    5   23      75.082    
+          9    3   15      59.106    
+         10    3   15      62.884    
+         11    3   11      32.301    
+         12    3    8      1.8942    
+         13    2    5      1.2541    
+         14    2    5     0.14698    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.49885E-01    0.10000E-02    0.80000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   7037.04
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   7037.04
+
+ Report Writer entered                                                            Time =   7038.15
+
+ Results generated                                                                Time =   7038.18
+
+ Report Writer entered                                                            Time =   7104.35
+
+ Results generated                                                                Time =   7104.41
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/13/2022   11:36:06:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:36:06:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.001 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.8
+
+ PDF updated                                                                      TIME =   7589.45
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   7589.48
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   7589.48
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      7660.7    
+          2    1    6      3786.5    
+          3    1   10     0.16243E+09
+          4    1   10     0.81036E+06
+          5    1   10     0.25452E+09
+          6    1   10     0.10189E+07
+          7    1   10      97732.    
+          8    1   10      12897.    
+          9    1   10      16610.    
+         10    1   10      4330.5    
+         11    1   10     0.12504E+07
+         12    1   10      22477.    
+         13    1    6      6032.7    
+         14    1   10      4286.2    
+         15    1   10     0.24603E+09
+         16    1   10     0.17911E+08
+         17    1   10     0.30186E+06
+         18    1   10     0.28355E+06
+         19    1   10      14548.    
+         20    1   10     0.10708E+07
+         21    1   10     0.11214E+09
+         22    1   10     0.71033E+06
+         23    1   10      14701.    
+         24    1   10     0.19778E+06
+         25    1   10      27742.    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.49885E-01    0.10000E-02    0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:38:12:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.5 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.003 0.8
+
+ PDF updated                                                                      TIME =   7715.00
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   7715.04
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   7715.04
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      59799.    
+          2    1   10      4343.0    
+          3    1   10     0.24238E+06
+          4    1   10     0.22302E+06
+          5    1   10     0.18941E+06
+          6    1   10      4099.1    
+          7    1   10     0.16525E+09
+          8    1   10     0.29799E+06
+          9    1   10      8513.6    
+
+  *** SEVERE ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:    
+      "RADFRAC")                                               (UDL03.3)        
+      THE FOLLOWING STAGES DRIED UP (VAPOR OR LIQUID FLOW APPROACHES 0):        
+       14                                                                       
+      A LIMIT OF  0.10000E-04 * SUM OF FEEDS WAS IMPOSED ON THE FLOW RATES      
+      OR A LIMIT OF  0.10000E-04 WAS IMPOSED ON THE STAGE V/L OR L/V RATIO.     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.49885E-01    0.30000E-02    0.80000    
+
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (BALMAS.1)       
+      BLOCK DISTILLA IS NOT IN MASS BALANCE:                                    
+      MASS INLET FLOW = 0.10680536E+01, MASS OUTLET FLOW = 0.10692020E+01       
+      RELATIVE DIFFERENCE = 0.10753095E-02                                      
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:38:34:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.5 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.1 0.8
+
+ PDF updated                                                                      TIME =   7737.25
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   7737.27
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   7737.27
+
+  *   WARNING WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:         
+      "RADFRAC")                                               (UDL03D.11)      
+      PREVIOUS SOLUTION VALUE OF MANIPULATED VARIABLE FOR "VARYNO= 1"           
+      LIES OUTSIDE CURRENT LIMITS.  MANIPULATED VARIABLE IS RESET TO ITS        
+      INITIAL VALUE.                                                            
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.37702E+06
+          2    1   10      12694.    
+          3    1   10      8809.3    
+          4    1    3      2466.4    
+          5    1    3      77.807    
+          6    7   13      30.544    
+          7    5    7      1.0132    
+          8    5    7     0.35578    
+          9    5    6     0.31728    
+         10    5    6     0.39872    
+         11    5    6     0.43591    
+         12    5    6     0.45923    
+         13    5    6     0.47436    
+         14    5    6     0.48511    
+         15    5    6     0.49364    
+         16    5    6     0.50107    
+         17    5    6     0.50802    
+         18    5    6     0.51476    
+         19    5    6     0.52147    
+         20    5    6     0.52822    
+         21    5    6     0.53505    
+         22    5    6     0.54199    
+         23    5    6     0.54905    
+         24    5    6     0.55624    
+         25    5    6     0.56356    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      OUTSIDE LOOP TOLERANCE WAS SATISFIED BUT DESIGN SPEC ITERATION            
+      (MIDDLE LOOP) FAILED TO CONVERGE.                                         
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.45837        0.10000        0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ BLOCK        DISTILLA IS GENERATED BECAUSE OF OTHER CHANGES 02/13/2022   11:42:30:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.5 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.1 0.8
+
+ PDF updated                                                                      TIME =   7972.75
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   7972.77
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   7972.77
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6   11      153.37    
+          2    5    8      79.959    
+          3    5    8      40.777    
+          4    5    7      20.491    
+          5    5    7      10.143    
+          6    5    6      4.9206    
+          7    5    6      2.3186    
+          8    5    6      1.0835    
+          9    5    6     0.63100    
+         10    5    6     0.60211    
+         11    5    6     0.65103    
+         12    5    6     0.69998    
+         13    5    6     0.72737    
+         14    5    6     0.74677    
+         15    5    6     0.76202    
+         16    5    6     0.77527    
+         17    5    6     0.78766    
+         18    5    6     0.79974    
+         19    5    6     0.81180    
+         20    5    6     0.82400    
+         21    5    6     0.83639    
+         22    5    6     0.84903    
+         23    5    6     0.86194    
+         24    5    6     0.87513    
+         25    5    6     0.88862    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      OUTSIDE LOOP TOLERANCE WAS SATISFIED BUT DESIGN SPEC ITERATION            
+      (MIDDLE LOOP) FAILED TO CONVERGE.                                         
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.40140        0.10000        0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:45:04:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.1 0.8
+
+ PDF updated                                                                      TIME =   8126.84
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8126.86
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8126.86
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6    8     0.45438    
+          2    5    6     0.69469    
+          3    5    6     0.82152    
+          4    5    6     0.89214    
+          5    5    6     0.93500    
+          6    5    6     0.96426    
+          7    5    6     0.98697    
+          8    5    6      1.0066    
+          9    5    6      1.0249    
+         10    5    6      1.0428    
+         11    5    6      1.0607    
+         12    5    6      1.0788    
+         13    5    6      1.0973    
+         14    5    6      1.1162    
+         15    5    6      1.1355    
+         16    5    6      1.1553    
+         17    5    6      1.1757    
+         18    5    6      1.1965    
+         19    5    6      1.2179    
+         20    5    6      1.2399    
+         21    5    6      1.2625    
+         22    5    6      1.2857    
+         23    5    6      1.3095    
+         24    5    6      1.3340    
+         25    5    6      1.3591    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.33841        0.10000        0.80000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:45:26:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.1 0.5
+
+ PDF updated                                                                      TIME =   8149.41
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8149.43
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8149.43
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6    8     0.69623    
+          2    5    6      1.0711    
+          3    5    6      1.2714    
+          4    5    6      1.3853    
+          5    5    6      1.4569    
+          6    5    6      1.5079    
+          7    5    6      1.5492    
+          8    5    6      1.5861    
+          9    5    6      1.6214    
+         10    5    6      1.6564    
+         11    5    6      1.6918    
+         12    5    6      1.7279    
+         13    5    6      1.7651    
+         14    5    6      1.8034    
+         15    5    6      1.8428    
+         16    5    6      1.8836    
+         17    5    6      1.9257    
+         18    5    6      1.9692    
+         19    5    6      2.0142    
+         20    5    6      2.0608    
+         21    5    6      2.1090    
+         22    5    6      2.1588    
+         23    5    6      2.2105    
+         24    5    6      2.2640    
+         25    5    6      2.3195    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.26874        0.10000        0.50000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:45:49:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.1 0.6
+
+ PDF updated                                                                      TIME =   8171.60
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8171.62
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8171.62
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6    9      1.1991    
+          2    5    6      1.8572    
+          3    5    7      2.2160    
+          4    5    8      2.4275    
+          5    5    8      2.5674    
+          6    5    7      2.6732    
+          7    5    7      2.7635    
+          8    5    7      2.8479    
+          9    5    7      2.9309    
+         10    5    7      3.0150    
+         11    5    7      3.1015    
+         12    5    7      3.1912    
+         13    5    7      3.2844    
+         14    5    7      3.3817    
+         15    5    7      3.4833    
+         16    5    7      3.5895    
+         17    5    7      3.7007    
+         18    5    7      3.8171    
+         19    5    7      3.9391    
+         20    5    7      4.0670    
+         21    5   10      4.2018    
+         22    5   10      4.3428    
+         23    5   10      4.4911    
+         24    5   10      4.6472    
+         25    5   10      4.8117    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.19155        0.10000        0.60000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:47:18:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.05 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.6
+
+ PDF updated                                                                      TIME =   8261.21
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8261.23
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8261.23
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6   13      2.5373    
+          2    5   11      3.9815    
+          3    5   11      4.8002    
+          4    5   11      5.3151    
+          5    5   11      5.6865    
+          6    5   10      5.9942    
+          7    5   10      6.2782    
+          8    5   10      6.5591    
+          9    5   10      6.8478    
+         10    5   10      7.1505    
+         11    5   10      7.4713    
+         12    5   10      7.8133    
+         13    5   10      8.1790    
+         14    5   10      8.5715    
+         15    5   10      8.9934    
+         16    5   10      9.4482    
+         17    5   10      9.9395    
+         18    5   10      10.471    
+         19    5   10      11.049    
+         20    5   10      11.678    
+         21    5   10      12.365    
+         22    5   11      13.118    
+         23    5   11      13.946    
+         24    5   11      14.860    
+         25    5   11      15.875    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.10559        0.10000E-02    0.60000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:47:43:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.001 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.99
+
+ PDF updated                                                                      TIME =   8285.68
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8285.69
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8285.69
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    6   19      8.5389    
+          2    5   13      13.985    
+          3    5   11      17.487    
+          4    5   11      20.133    
+          5    5   11      22.501    
+          6    5   11      24.921    
+          7    5   12      27.625    
+          8    5   11      30.841    
+          9    5   13      34.883    
+         10    5   13      40.328    
+         11    5   13      48.508    
+         12    5   14      63.704    
+         13    5   19      131.85    
+         14    5   22      305.47    
+         15    2    9      181.86    
+         16    7   51      276.70    
+         17    1   10      104.78    
+         18    4   26      66.803    
+         19    3   14      39.042    
+         20    2    8      20.767    
+         21    3    9      11.660    
+         22    3    9      6.4578    
+         23    2    5      1.0507    
+         24    2    4     0.73863    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.55850E-01    0.10000E-02    0.99000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8285.70
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8285.70
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:48:28:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.0558495226 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.99
+
+ PDF updated                                                                      TIME =   8331.14
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8331.15
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8331.15
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.31038E+06
+          2    1   10      2745.2    
+          3    1    8     0.42048E+08
+          4    1   10      1034.4    
+          5    1   10     0.55041E+08
+          6    1   10      987.97    
+          7    1   10     0.12191E+06
+          8    1   10      970.21    
+          9    1   10     0.17337E+06
+         10    1   10      981.03    
+         11    1   10     0.16559E+06
+         12    1   10      985.37    
+         13    1   10     0.16551E+06
+         14    1   10      986.99    
+         15    1   10     0.16525E+06
+         16    1   10      987.57    
+         17    1   10     0.16518E+06
+         18    1   10      987.77    
+         19    1   10     0.16514E+06
+         20    1   10      987.84    
+         21    1   10     0.16513E+06
+         22    1   10      987.86    
+         23    1   10     0.16513E+06
+         24    1   10      987.87    
+         25    1   10     0.16512E+06
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.55850E-01    0.10000E-02    0.99000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:48:53:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.001 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.99
+
+ PDF updated                                                                      TIME =   8356.13
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8356.15
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8356.15
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.25967E+09
+          2    1    9      5560.2    
+          3    1    4      2845.3    
+          4    1    6      166.93    
+          5    7   28      108.64    
+          6    6   31      65.805    
+          7    4   14      34.779    
+          8    4   14      5.1098    
+          9    3    8     0.56262    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.55847E-01    0.10000E-02    0.99000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8356.15
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8356.15
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/13/2022   11:49:43:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 15
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.002 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.99
+
+ PDF updated                                                                      TIME =   8406.00
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   8406.02
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   8406.02
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   13      2.2095    
+          2    3    7     0.28065    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.55851E-01    0.10000E-02    0.99000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8406.02
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   8406.02
+
+ Report Writer entered                                                            Time =   8416.35
+
+ Results generated                                                                Time =   8416.37
+
+ Report Writer entered                                                            Time =   8512.77
+
+ Results generated                                                                Time =   8512.80
+
+ Report Writer entered                                                            Time =   8513.13
+
+ Results generated                                                                Time =   8513.14
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         3
+          ERRORS      0        0        12
+        WARNINGS      0        0        20
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     85.71
+
+ Results generated                                                                Time =     85.79
+
+ Report Writer entered                                                            Time =    235.32
+
+ Results generated                                                                Time =    235.38
+
+ Report Writer entered                                                            Time =    235.68
+
+ Results generated                                                                Time =    235.72
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     13.01
+
+ Results generated                                                                Time =     13.11
+
+ Report Writer entered                                                            Time =     39.20
+
+ Results generated                                                                Time =     39.21
+
+ Report Writer entered                                                            Time =     39.64
+
+ Results generated                                                                Time =     39.66
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     18.17
+
+ Results generated                                                                Time =     18.35
+
+ Report Writer entered                                                            Time =     98.96
+
+ Results generated                                                                Time =     99.06
+
+ Report Writer entered                                                            Time =     99.36
+
+ Results generated                                                                Time =     99.38
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     14.60
+
+ Results generated                                                                Time =     14.80
+
+ Report Writer entered                                                            Time =    791.88
+
+ Results generated                                                                Time =    791.92
+
+ Report Writer entered                                                            Time =    792.23
+
+ Results generated                                                                Time =    792.26
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     14.87
+
+ Results generated                                                                Time =     14.95
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   1878.70
+
+ Results generated                                                                Time =   1878.72
+
+ Report Writer entered                                                            Time =   1878.99
+
+ Results generated                                                                Time =   1879.00
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:41:40:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.002 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.001 0.99
+
+ PDF updated                                                                      TIME =     69.57
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+Calculations begin                                                              time     70.41
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =     70.41
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.51238E+07
+          2    1   10      18613.    
+          3    1    9     0.64116E+06
+          4    1    8      65264.    
+          5    1    9      8484.9    
+          6    1   10      2029.5    
+          7    1   10      1698.2    
+          8    1   10      446.79    
+          9    1   10      300.37    
+         10   12   43      187.40    
+         11    1   10      233.89    
+         12    7   37      202.34    
+         13    7   34      78.430    
+         14    7   30      52.517    
+         15    8   29      29.130    
+         16    8   30      19.082    
+         17    8   28      20.858    
+         18    7   28      17.116    
+         19    7   25      13.904    
+         20    6   23      8.2620    
+         21    6   23      2.7331    
+         22    7   26      2.0554    
+         23    7   23      2.2381    
+         24    7   21      19.683    
+         25    5   19      57.808    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.56102E-01    0.10000E-02    0.99000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:42:47:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.05 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="c6h12_recovery"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =    136.64
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    136.68
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    136.68
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      21922.    
+          2    1   10      4735.8    
+          3    1   10      29331.    
+          4    1   10      4130.0    
+          5    1   10      1528.3    
+          6    1   10      16079.    
+          7    1   10      14622.    
+          8    1   10     0.38368E+06
+          9    1   10      8978.1    
+         10    1   10     0.22260E+06
+         11    1   10     0.36452E+06
+         12    1   10      28668.    
+         13    1   10      7780.7    
+         14    1   10      2301.1    
+         15    1   10      7847.8    
+         16    1   10      4178.4    
+         17    1   10      12409.    
+         18    1    9      3817.8    
+         19    1   10      418.03    
+         20    1   10      3147.6    
+         21    1   10      3474.8    
+         22    1   10      1427.1    
+         23    1   10      614.50    
+         24    1   10      977.58    
+         25    1   10      17245.    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+  *** SEVERE ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:    
+      "RADFRAC")                                               (UDL03.3)        
+      THE FOLLOWING STAGES DRIED UP (VAPOR OR LIQUID FLOW APPROACHES 0):        
+       15                                                                       
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.56102E-01    0.10000E-01    0.20000    
+
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (BALMAS.1)       
+      BLOCK DISTILLA IS NOT IN MASS BALANCE:                                    
+      MASS INLET FLOW = 0.10680536E+01, MASS OUTLET FLOW = 0.10693014E+01       
+      RELATIVE DIFFERENCE = 0.11683600E-02                                      
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:43:06:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.05 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+
+ PDF updated                                                                      TIME =    155.98
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    156.00
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    156.00
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      1662.9    
+          2    1   10      605.13    
+          3    1   10      11678.    
+          4    1   10      6370.7    
+          5    1   10      403.71    
+          6    1   10      384.19    
+          7    1   10      6663.7    
+          8    1   10      3680.1    
+          9    1   10      531.58    
+         10    1   10      911.70    
+         11    1   10      885.18    
+         12    1   10      3453.9    
+         13    1   10      1723.7    
+         14    1   10      2442.1    
+         15    1   10      1379.2    
+         16    1   10      826.28    
+         17    1   10      5067.6    
+         18    1   10      437.93    
+         19    1   10      254.19    
+         20    1   10      1964.4    
+         21    1   10      265.11    
+         22    1   10      1013.5    
+         23    1   10      111.93    
+         24    1   10      715.98    
+         25    1   10      11508.    
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:43:20:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.04 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+
+ PDF updated                                                                      TIME =    169.91
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    169.92
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    169.92
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.11339E+06
+          2    1   10      8383.8    
+          3    1   10      1506.8    
+          4    1   10      1945.3    
+          5    1   10      2485.9    
+          6    1   10      1329.8    
+          7    1   10      3693.4    
+          8    1   10      986.23    
+          9    1   10      2715.1    
+         10    1   10      10971.    
+         11    1   10      667.91    
+         12    1   10      374.34    
+         13    1   10      301.93    
+         14    1   10      1896.4    
+         15    1   10      366.71    
+         16    1   10      536.57    
+         17    1   10      619.75    
+         18    1   10      746.77    
+         19    1   10      856.97    
+         20    1   10      353.40    
+         21    1   10      354.68    
+         22    1   10      640.51    
+         23    1   10      1799.1    
+         24    1   10      497.58    
+         25    1   10     0.79100E+06
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (UDL03.1)        
+      RADFRAC NOT CONVERGED IN  25 OUTSIDE LOOP ITERATIONS.                     
+
+  *** SEVERE ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:    
+      "RADFRAC")                                               (UDL03.3)        
+      THE FOLLOWING STAGES DRIED UP (VAPOR OR LIQUID FLOW APPROACHES 0):        
+       15                                                                       
+
+
+  **  ERROR WHILE EXECUTING UNIT OPERATIONS BLOCK: "DISTILLA" (MODEL:           
+      "RADFRAC")                                               (BALMAS.1)       
+      BLOCK DISTILLA IS NOT IN MASS BALANCE:                                    
+      MASS INLET FLOW = 0.10680536E+01, MASS OUTLET FLOW = 0.10818001E+01       
+      RELATIVE DIFFERENCE = 0.12870666E-01                                      
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:43:38:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+
+ PDF updated                                                                      TIME =    188.21
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    188.22
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    188.22
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.42122E+06
+          2    1   10      9433.8    
+          3    1   10      26914.    
+          4    1   10      2704.0    
+          5    1    5      248.43    
+          6    1    4      260.02    
+          7    1    3      8.9592    
+          8    1    5      20.070    
+          9    1    4      2.7815    
+         10    1    3      1.1949    
+         11    1    3     0.44961    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    188.23
+
+  *   WARNING WHILE CHECKING PHASE EQUILIBRIUM RESULTS FOR UNIT OPERATIONS      
+      BLOCK: "DISTILLA" (MODEL: "RADFRAC")                     (CHKPEQ.1)       
+      COMPONENT "HYDRO-01" IN STREAM "TOPS" IS NOT IN PHASE EQUILIBRIUM.        
+      RELATIVE ERROR IN VL FUGACITY IS 0.3189 . FUGACITIES ARE 3480.3040 FOR    
+      VAPOR AND 2638.7577 FOR LIQUID. MOLE FRACTIONS ARE 2.5239-03 FOR VAPOR    
+      AND 5.0752D-06 FOR LIQUID. FUGACITY COEFFICIENTS ARE 1.0000 FOR VAPOR AND 
+      377.0523 FOR LIQUID.                                                      
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   18:44:08:09 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:44:08:09 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=10 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 10 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+
+ PDF updated                                                                      TIME =    217.35
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    217.37
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    217.37
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    6      230.23    
+          2    1    3      7.1215    
+          3    1    3     0.22435    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    217.37
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    217.37
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       H2       02/20/2022   18:45:34:99 
+ STREAM H2
+     SUBSTREAM MIXED TEMP=120. <F> PRES=335. <psia>  &
+         MOLE-FLOW=350. <lbmol/hr>
+     MOLE-FRAC HYDRO-01 0.9 / NITRO-01 0.002 / METHA-01 0.098
+
+ PDF updated                                                                      TIME =    304.02
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    304.04
+
+
+Calculations begin                                                              time    304.04
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM H2 OF BLOCK HEATER-1                  TIME =    304.04
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.309744E+06  V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK HEATER-1 MODEL: HEATER                                            TIME =    304.04
+      KODE = 2  NTRIAL =   3  T = 422.0389  P = 2.275270E+06  V =  1.00000      Q =  132728.    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.04
+      ITER   0 For Tear Streams: PRODUCT
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.04
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.710446      Q =-1.288189E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.04
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.04
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.04
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.646633E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.04
+      ITER   1 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    4     TEMP =  469.344    
+      KODE = 1  NTRIAL =   3  T = 469.3443  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    1:   5 VARS NOT CONVERGED, MAX ERR/TOL      5762.7        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.758078      Q =-1.288338E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.595774E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   2 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  470.508    
+      KODE = 1  NTRIAL =   3  T = 470.5081  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    2:   6 VARS NOT CONVERGED, MAX ERR/TOL      666.07        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.775058      Q =-1.322501E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.569809E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   3 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  494.609    
+      KODE = 1  NTRIAL =   3  T = 494.6089  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    3:   6 VARS NOT CONVERGED, MAX ERR/TOL      245.74        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.779744      Q =-1.505133E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.549667E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   4 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  480.773    
+      KODE = 1  NTRIAL =   3  T = 480.7727  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    4:   6 VARS NOT CONVERGED, MAX ERR/TOL     -265.79        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.790104      Q =-1.418456E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.539581E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   5 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  479.246    
+      KODE = 1  NTRIAL =   3  T = 479.2460  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    5:   6 VARS NOT CONVERGED, MAX ERR/TOL      53.812        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.793529      Q =-1.420316E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.530503E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   6 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  475.493    
+      KODE = 1  NTRIAL =   3  T = 475.4929  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    6:   6 VARS NOT CONVERGED, MAX ERR/TOL      27.004        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.795112      Q =-1.403690E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.525463E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   7 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  479.228    
+      KODE = 1  NTRIAL =   3  T = 479.2283  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    7:   6 VARS NOT CONVERGED, MAX ERR/TOL      23.903        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.796233      Q =-1.428785E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.523393E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   8 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  478.043    
+      KODE = 1  NTRIAL =   3  T = 478.0430  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    8:   6 VARS NOT CONVERGED, MAX ERR/TOL     -21.181        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.796733      Q =-1.422790E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.522122E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER   9 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.558    
+      KODE = 1  NTRIAL =   3  T = 477.5583  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    9:   5 VARS NOT CONVERGED, MAX ERR/TOL     -5.7398        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.796901      Q =-1.421063E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.521290E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER  10 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.726    
+      KODE = 1  NTRIAL =   3  T = 477.7263  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   10:   3 VARS NOT CONVERGED, MAX ERR/TOL     -2.1497        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.797109      Q =-1.422061E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.521083E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER  11 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.660    
+      KODE = 1  NTRIAL =   3  T = 477.6598  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   11:   1 VARS NOT CONVERGED, MAX ERR/TOL     -1.6768        TIME =    304.06
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    304.06
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.797175      Q =-1.421895E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    304.06
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    304.06
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.520885E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    304.06
+      ITER  12 For Tear Streams: PRODUCT
+
+  LOOP $OLVER01 ITER   12:     *** CONVERGED *** , MAX ERR/TOL    -0.85420        TIME =    304.06
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    304.06
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      87.583    
+          2    1    3      2.6604    
+          3    1    3     0.28652    
+
+      GENERATING RESULTS FOR UOS BLOCK HEATER-1 MODEL: HEATER                     TIME =    304.06
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    304.06
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    304.06
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       H2       02/20/2022   18:46:08:09 
+ STREAM H2
+     SUBSTREAM MIXED TEMP=120. <F> PRES=335. <psia>  &
+         MOLE-FLOW=340. <lbmol/hr>
+     MOLE-FRAC HYDRO-01 0.9 / NITRO-01 0.002 / METHA-01 0.098
+
+ PDF updated                                                                      TIME =    337.27
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    337.27
+
+
+Calculations begin                                                              time    337.28
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM H2 OF BLOCK HEATER-1                  TIME =    337.28
+      KODE = 2  NTRIAL =   3  T = 322.0389  P = 2.309744E+06  V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK HEATER-1 MODEL: HEATER                                            TIME =    337.28
+      KODE = 2  NTRIAL =   3  T = 422.0389  P = 2.275270E+06  V =  1.00000      Q =  128936.    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   0 For Tear Streams: PRODUCT
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.797175      Q =-1.421895E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.523032E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   1 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  482.894    
+      KODE = 1  NTRIAL =   3  T = 482.8938  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    1:   5 VARS NOT CONVERGED, MAX ERR/TOL     -471.36        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.776647      Q =-1.422193E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.556607E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   2 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  478.930    
+      KODE = 1  NTRIAL =   3  T = 478.9305  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    2:   6 VARS NOT CONVERGED, MAX ERR/TOL     -339.83        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.764229      Q =-1.375409E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.577130E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   3 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  480.687    
+      KODE = 1  NTRIAL =   3  T = 480.6866  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    3:   6 VARS NOT CONVERGED, MAX ERR/TOL     -220.49        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.760395      Q =-1.353215E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.594579E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   4 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  475.339    
+      KODE = 1  NTRIAL =   3  T = 475.3394  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    4:   6 VARS NOT CONVERGED, MAX ERR/TOL     -131.07        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.752904      Q =-1.332825E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.595693E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   5 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.048    
+      KODE = 1  NTRIAL =   3  T = 477.0485  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    5:   6 VARS NOT CONVERGED, MAX ERR/TOL     -73.517        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 322.0389  P = 2.137375E+06  V = 0.750594      Q =-1.336903E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.600071E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   6 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.428    
+      KODE = 1  NTRIAL =   3  T = 477.4284  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    6:   6 VARS NOT CONVERGED, MAX ERR/TOL     -39.683        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.749275      Q =-1.336117E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.602418E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   7 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.592    
+      KODE = 1  NTRIAL =   3  T = 477.5921  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    7:   5 VARS NOT CONVERGED, MAX ERR/TOL     -20.975        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.748460      Q =-1.335885E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.603572E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   8 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.426    
+      KODE = 1  NTRIAL =   3  T = 477.4261  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    8:   5 VARS NOT CONVERGED, MAX ERR/TOL     -10.963        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.748022      Q =-1.334226E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.604232E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER   9 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.596    
+      KODE = 1  NTRIAL =   3  T = 477.5956  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER    9:   4 VARS NOT CONVERGED, MAX ERR/TOL     -5.6961        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.747888      Q =-1.334263E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.604755E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER  10 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.564    
+      KODE = 1  NTRIAL =   3  T = 477.5638  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   10:   2 VARS NOT CONVERGED, MAX ERR/TOL     -2.9473        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.747673      Q =-1.334350E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.604803E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER  11 For Tear Streams: PRODUCT
+
+      --FLASH TEAR STREAM PRODUCT 
+      NO. TEMP ITER =    5     TEMP =  477.609    
+      KODE = 1  NTRIAL =   3  T = 477.6089  P = 2.171849E+06  V =  1.00000      Q =  0.00000    
+
+  LOOP $OLVER01 ITER   11:   1 VARS NOT CONVERGED, MAX ERR/TOL     -1.5268        TIME =    337.28
+
+      UOS BLOCK FLASH    MODEL: FLASH2                                            TIME =    337.28
+      KODE = 2  NTRIAL =   1  T = 322.0389  P = 2.137375E+06  V = 0.747608      Q =-1.334440E+06
+
+      UOS BLOCK V-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.92000D+00    0.80000D-01
+
+      UOS BLOCK L-SPLIT  MODEL: FSPLIT                                            TIME =    337.28
+      SPLIT FRACTIONS:  0.70000D+00    0.30000D+00
+
+      UOS BLOCK REACTOR  MODEL: RSTOIC                                            TIME =    337.28
+      KODE = 2  NTRIAL =   2  T = 477.5944  P = 2.171849E+06  V =  1.00000      Q =-1.604930E+06
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: WEGSTEIN                                TIME =    337.28
+      ITER  12 For Tear Streams: PRODUCT
+
+  LOOP $OLVER01 ITER   12:     *** CONVERGED *** , MAX ERR/TOL    -0.78883        TIME =    337.28
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    337.28
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      50.892    
+          2    1    3      1.6837    
+          3    1    3     0.18830    
+
+      GENERATING RESULTS FOR UOS BLOCK HEATER-1 MODEL: HEATER                     TIME =    337.28
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    337.28
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    337.28
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:47:29:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=10 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 10 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =    418.72
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    418.73
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    418.73
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    7   16      10.926    
+          2    5   13      17.341    
+          3    5   11      21.693    
+          4    5   11      25.238    
+          5    5   11      28.666    
+          6    5   11      32.416    
+          7    5   11      36.866    
+          8    5   11      42.469    
+          9    5   11      49.943    
+         10    5   15      60.666    
+         11    5   15      77.878    
+         12    5   15      112.27    
+         13    6   16      220.38    
+         14    9   20      208.35    
+         15    7   18      324.82    
+         16    2    6      168.91    
+         17    2    5      168.54    
+         18    2    6      77.689    
+         19    2    5      7.6678    
+         20    2    4     0.58685    
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52010E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    418.73
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    418.73
+
+ Report Writer entered                                                            Time =    454.89
+
+ Results generated                                                                Time =    454.92
+
+ Report Writer entered                                                            Time =    499.53
+
+ Results generated                                                                Time =    499.56
+
+ Report Writer entered                                                            Time =    499.80
+
+ Results generated                                                                Time =    499.81
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   18:50:45:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:50:45:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=13 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 13 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =    614.78
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    614.79
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    614.79
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    5   15      64.969    
+          2    3    7      3.2158    
+          3    2    4      6.9737    
+          4    2    4     0.44875E-01
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52013E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    614.79
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    614.79
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+ Report Writer entered                                                            Time =    622.42
+
+ Results generated                                                                Time =    622.44
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   18:53:51:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   18:53:51:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =    800.98
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time    800.99
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    800.99
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   12      32.180    
+          2    3    7      1.5010    
+          3    2    4      3.3086    
+          4    2    3     0.25903E-01
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52013E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    800.99
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    800.99
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+ Report Writer entered                                                            Time =    809.56
+
+ Results generated                                                                Time =    809.58
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   19:05:09:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   19:05:09:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=13 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 13 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =   1478.96
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1478.97
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   1478.97
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   11      1.9184    
+          2    2    6      1.5036    
+          3    2    4      1.1285    
+          4    2    3     0.98028E-02
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52013E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1478.97
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1478.97
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+ Report Writer entered                                                            Time =   1486.75
+
+ Results generated                                                                Time =   1486.77
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   19:08:18:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   19:08:18:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=15 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 15 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =   1667.46
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+Calculations begin                                                              time   1667.47
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =   1667.47
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   12      32.178    
+          2    3    7      1.3430    
+          3    2    4      2.9683    
+          4    2    3     0.23021E-01
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52013E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1667.47
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   1667.47
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1
+
+ Report Writer entered                                                            Time =   1675.13
+
+ Results generated                                                                Time =   1675.15
+
+ Report Writer entered                                                            Time =   1696.48
+
+ Results generated                                                                Time =   1696.50
+
+ Report Writer entered                                                            Time =   1696.75
+
+ Results generated                                                                Time =   1696.78
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         2
+          ERRORS      0        0         6
+        WARNINGS      0        0         1

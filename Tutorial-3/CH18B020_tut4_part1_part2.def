@@ -1,0 +1,10 @@
+INPUT: CH18B020_tut4_part1_part2.inm
+MODNAME: apmain
+RUNID: CH18B020_tut4_part1_part2
+NEW_RUNID: CH18B020_tut4_part1_part2
+OLD_RUNID: CH18B020_tut4_part1_part2
+PDF: CH18B020_tut4_part1_part2.appdf
+USERNAME: HP
+XMOD: C:\Program Files\AspenTech\Aspen Plus V12.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _4004ndy.ads

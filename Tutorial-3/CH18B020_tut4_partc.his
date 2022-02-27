@@ -1,0 +1,167 @@
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     17.30
+
+ Results generated                                                                Time =     17.42
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   19:17:37:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   19:17:37:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=13 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 13 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =     84.05
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+Calculations begin                                                              time     84.06
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =     84.06
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   11      1.9184    
+          2    2    6      1.5037    
+          3    2    4      1.1286    
+          4    2    3     0.98091E-02
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52013E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     84.06
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     84.06
+
+ Report Writer entered                                                            Time =     84.69
+
+ Results generated                                                                Time =     84.71
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 02/20/2022   19:21:34:99 
+ FLOWSHEET
+     BLOCK HEATER-1 IN=H2 OUT=H2-HOT
+     BLOCK REACTOR IN=H2-HOT C6H6-HOT RECYCLE1 RECYCLE2 OUT= &
+         PRODUCT
+     BLOCK HEATER-2 IN=C6H6 OUT=C6H6-HOT
+     BLOCK FLASH IN=PRODUCT OUT=VAPOURF LIQUIDF
+     BLOCK L-SPLIT IN=LIQUIDF OUT=DIST-IN RECYCLE2
+     BLOCK V-SPLIT IN=VAPOURF OUT=RECYCLE1 PURGE
+     BLOCK DISTILLA IN=DIST-IN OUT=TOPS BOTTOMS
+
+ CHANGES WERE MADE TO BLOCK        DISTILLA 02/20/2022   19:21:34:99 
+ BLOCK DISTILLA RADFRAC
+     PARAM NSTAGE=10 ALGORITHM=STANDARD MAXOL=25 DAMPING=NONE
+     COL-CONFIG CONDENSER=PARTIAL-V
+     FEEDS DIST-IN 8
+     PRODUCTS TOPS 1 V / BOTTOMS 10 L
+     P-SPEC 1 200. <psi>
+     COL-SPECS D:F=0.1 MOLE-RR=1.2
+     DB:F-PARAMS STREAMS=DIST-IN COMPS=BENZE-01 HYDRO-01 CYCLO-01  &
+         NITRO-01 METHA-01
+     SPEC 1 MOLE-RECOV 0.9999 COMPS=CYCLO-01 STREAMS=BOTTOMS  &
+         BASE-STREAMS=DIST-IN SPEC-DESCRIP="Mole recovery, 0.9999"
+     VARY 1 D:F 0.01 0.2
+
+ PDF updated                                                                      TIME =    320.91
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+ 
+ 
+
+
+Calculations begin                                                              time    320.94
+
+
+      UOS BLOCK DISTILLA MODEL: RADFRAC                                           TIME =    320.94
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    4   12      3.4651    
+          2    2    5      3.9085    
+          3    2    4      1.0073    
+          4    2    3     0.38338E-01
+
+      RESULTS FOR MANIPULATED VARIABLES:
+      VARIABLE     FINAL VALUE    LOWER BOUND    UPPER BOUND
+         1         0.52010E-01    0.10000E-01    0.20000    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    320.94
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =    320.94
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =    331.68
+
+ Results generated                                                                Time =    331.70
+
+ Report Writer entered                                                            Time =    462.95
+
+ Results generated                                                                Time =    462.97
+
+ Report Writer entered                                                            Time =    463.28
+
+ Results generated                                                                Time =    463.31
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   1853.60
+
+ Results generated                                                                Time =   1853.62
+
+ Report Writer entered                                                            Time =   1853.88
+
+ Results generated                                                                Time =   1853.90
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED

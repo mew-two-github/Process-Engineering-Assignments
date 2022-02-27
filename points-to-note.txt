@@ -1,1 +1,3 @@
 * stages in distillation column include reboiler and condenser. So feed stage = feed tray + 1. stages = tray + 2 (reboiler and condenser).
+* above is WRONG APPARENTLY ACCORDING TO TAs. total condenser doesnt count. so only trays+ 1 and feed doesnt change
+* Use design and vary to set recovery in radfrac

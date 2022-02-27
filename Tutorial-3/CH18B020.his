@@ -2137,3 +2137,55 @@ RUN SAVED
 
 
  NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     14.60
+
+ Results generated                                                                Time =     14.80
+
+ Report Writer entered                                                            Time =    791.88
+
+ Results generated                                                                Time =    791.92
+
+ Report Writer entered                                                            Time =    792.23
+
+ Results generated                                                                Time =    792.26
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+ Report Writer entered                                                            Time =     14.87
+
+ Results generated                                                                Time =     14.95
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   1878.70
+
+ Results generated                                                                Time =   1878.72
+
+ Report Writer entered                                                            Time =   1878.99
+
+ Results generated                                                                Time =   1879.00
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
