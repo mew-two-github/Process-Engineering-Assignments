@@ -1,5 +1,5 @@
 # Process-Engineering-Assignments
-Assignments given in the capstone project course Process Engineering (CH4250), Fall 2022. These assignments are meant for us to be familiarised with ASPEN.
+Assignments given in the capstone project course Process Engineering (CH4250), Spring 2022. These assignments are meant for us to be familiarised with ASPEN.
 ## Assignment-1:
 * Distillation column simulation; all properties specified. Liquid-vapour composition and outlet concentrations are asked.
 ## Assignment-2:
