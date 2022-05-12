@@ -17,4 +17,4 @@ Assignments given in the capstone project course Process Engineering (CH4250), F
   * unit conditions determined by design and vary
   * Waste outlet constraint
 * Sensitivity Analysis
-* Process Flow Diagram (use draw.io)
+* Process Flow Diagram (use https://app.diagrams.net/)
